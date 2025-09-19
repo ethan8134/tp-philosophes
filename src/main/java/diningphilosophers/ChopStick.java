@@ -13,10 +13,8 @@ public class ChopStick {
         while (!iAmFree) {
             wait();
         }
-        // assert iAmFree;
         iAmFree = false;
         System.out.println("baguette " + myNumber + " prise");
-        // Pas utile de faire notifyAll ici, personne n'attend qu'elle soit occupée
     }
 
     synchronized public boolean tryTake() {
@@ -28,14 +26,13 @@ public class ChopStick {
 
     synchronized public void release() {
         // assert !iAmFree;
-        System.out.println("baguette " + myNumber + " relâchée");
         iAmFree = true;
-        notifyAll(); // On prévient ceux qui attendent que la baguette soit libre
+        System.out.println("baguette " + myNumber + " relâchée");
+        notifyAll(); // prévient ceux qui attendent cette baguette
     }
 
-   @Override
+    @Override
     public String toString() {
         return "baguette #" + myNumber;
     }
-    
 }
