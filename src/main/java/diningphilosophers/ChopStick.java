@@ -19,6 +19,13 @@ public class ChopStick {
         // Pas utile de faire notifyAll ici, personne n'attend qu'elle soit occupée
     }
 
+    synchronized public boolean tryTake() {
+        if (!iAmFree) return false;
+        iAmFree = false;
+        System.out.println("baguette " + myNumber + " prise (try)");
+        return true;
+    }
+
     synchronized public void release() {
         // assert !iAmFree;
         System.out.println("baguette " + myNumber + " relâchée");

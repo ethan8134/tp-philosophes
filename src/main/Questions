@@ -1,0 +1,12 @@
+Question 1 : Regarder dans le code la prise en charge du multithread et expliquer comment les accès concurrents sont gérés.
+
+Les accès concurrents sont gérés par tout d'abord l'ajout de synchronized() qui assure la gestion d'un seul thread à la fois.
+
+La boucle while assure ensuite que si une baqguette est prise, le philosophe attend.
+
+Question 2 : Est-ce un deadlock ou une famine ? Pourquoi ce blocage apparaît-il ?
+
+Il s'agit ici d'un deadlock, chaque thread attend une chose détenue par un autre. On a une cycle d'interblocage.
+
+Chaque baguette est bloquée.
+
