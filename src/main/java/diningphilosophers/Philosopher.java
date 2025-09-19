@@ -28,11 +28,6 @@ public class Philosopher extends Thread {
         sleep(delai + rand.nextInt(delai + 1));
     }
 
-    /**
-     * Tente d'acquérir first puis second. Si second indisponible, attend un court
-     * timeout sur le monitor de 'second' pour voir s'il se libère ; sinon
-     * relâche 'first' et renvoie false.
-     */
     private boolean acquireWithShortWait(ChopStick first, ChopStick second) throws InterruptedException {
         // Tentative immédiate sur la première baguette
         if (!first.tryTake()) {
@@ -46,7 +41,7 @@ public class Philosopher extends Thread {
             // tentative immédiate sur la seconde (synchronisée sur second)
             if (!second.tryTake()) {
                 // pas disponible : on attend un court laps de temps sur second
-                long timeout = 50 + rand.nextInt(151); // 50..200 ms (ajustable)
+                long timeout = 50 + rand.nextInt(151);
                 try {
                     second.wait(timeout);
                 } catch (InterruptedException ie) {
@@ -93,7 +88,7 @@ public class Philosopher extends Thread {
                     }
 
                     if (!ate) {
-                        // Petite attente aléatoire avant de retenter (évite bouclage serré)
+                        // Petite attente aléatoire avant de retenter
                         sleep(50 + rand.nextInt(200));
                     }
                 }
