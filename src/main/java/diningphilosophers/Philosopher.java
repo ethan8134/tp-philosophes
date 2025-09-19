@@ -37,6 +37,8 @@ public class Philosopher extends Thread {
         // Tentative immédiate sur la première baguette
         if (!first.tryTake()) {
             return false;
+        } else {
+            think();
         }
 
         // On tient maintenant 'first' : on va tenter la seconde.
@@ -62,7 +64,6 @@ public class Philosopher extends Thread {
             }
         }
 
-        // si on arrive ici, on a pris les deux baguettes (first + second)
         return true;
     }
 
@@ -70,11 +71,10 @@ public class Philosopher extends Thread {
     public void run() {
         while (running) {
             try {
-                think();
 
                 boolean ate = false;
                 while (!ate && running) {
-                    // Ordre aléatoire d'acquisition (garde du comportement original)
+                    // Ordre aléatoire d'acquisition
                     if (rand.nextInt(2) == 0) {
                         if (acquireWithShortWait(myLeftStick, myRightStick)) {
                             eat();
